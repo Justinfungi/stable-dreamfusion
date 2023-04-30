@@ -35,9 +35,11 @@ v0 are for back up or some initial version
   --text is for the prompt following the author of stable dream fusion <br>
   --model is for choose the pretrain models <br>
 
+      ```bash
       python Prompt.py --text "a dog is in front of a rabbit" --model vlt5
       python Prompt.py --text "a dog is in front of a rabbit" --model bert
       python Prompt.py --text "a dog is in front of a rabbit" --model XLNet
+      ```
 
   - RelNet.ipynb <br>
   For original trial, run it in jupyter notebook <br>
@@ -45,14 +47,18 @@ v0 are for back up or some initial version
   - Relnet_data.py <br>
   For generate some demo data for Relnet, 0 mean original, 1/-1 mean opposite direction in x/y/z axis. 99 mean random number for randomness <br>
 
+      ```bash
       python Relnet_data.py
+      ```
 
   - mesh_to_video.py <br>
   --center_obj IS THE CENTER OBJECT <br>
   --surround_obj IS THE SURROUNDING OBJECT SUBJECT TO CHANGE <br>
   --transform_vector THE X Y Z 3d vector for transform <br>
 
+      ```bash
       python mesh_to_video.py --center_obj 'mesh_whiterabbit/mesh.obj' --surround_obj 'mesh_snake/mesh.obj' --transform_vector [1,0,0]
+      ```
 
 
 
