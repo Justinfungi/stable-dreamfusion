@@ -18,7 +18,7 @@ v0 are for back up or some initial version
 
 - Usage
 
-  - r_precision.py
+  - r_precision.py <br>
   For prompt seperation
   --text is for the prompt following the author of stable dream fusion
   --workspace is the workspace folder which will be created for every prompt fed into stable dreamfusion
