@@ -43,5 +43,19 @@ v0 are for back up or some initial version
   - Relnet_data.py
   For generate some demo data for Relnet, 0 mean original, 1/-1 mean opposite direction in x/y/z axis. 99 mean random number for randomness
 
+    python Relnet_data.py
+
   - mesh_to_video.py
+  --center_obj IS THE CENTER OBJECT
+  --surround_obj IS THE SURROUNDING OBJECT SUBJECT TO CHANGE
+  --transform_vector THE X Y Z 3d vector for transform
+
     python mesh_to_video.py --center_obj 'mesh_whiterabbit/mesh.obj' --surround_obj 'mesh_snake/mesh.obj' --transform_vector [1,0,0]
+
+
+
+
+
+
+RunningDemo:    
+    All the prompt we run is in the ipynb files

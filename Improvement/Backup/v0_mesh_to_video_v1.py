@@ -4,24 +4,32 @@ import trimesh
 import argparse
 from pathlib import Path
 from tqdm import tqdm
-import pyvista as pv
 
-def render_video(anim_mesh):
-    center = anim_mesh.center_mass
-    plotter = pv.Plotter(off_screen=True)
-    plotter.add_mesh(anim_mesh)
+def generate_frames(anim_mesh, outfile_path, num_frames=100):
 
-    radius = 10
-    n_frames = 360  
-    angle_step = 2 * np.pi / n_frames  
-    for i in tqdm(range(n_frames)):
-        camera_pos = [center[0] + radius * np.cos(i*angle_step),center[1] + radius *np.sin(i*angle_step),center[2]]
-        plotter.camera_position = (camera_pos, center, (0, 0, 1))
-        plotter.show(screenshot=f'frame_{i}.png', auto_close=False)
-    plotter.close()
-    os.system('ffmpeg -r 30 -f image2 -s 1920x1080 -i "result/frame_%d.png" -vcodec libx264 -crf 25  -pix_fmt yuv420p result/output.mp4')
+    print('Generating frames ...')
+    for frame_num in tqdm(range(num_frames)):
+        angle_deg = frame_num * 2 * np.pi / 100
+        R = np.array([
+            [np.cos(angle_deg), -np.sin(angle_deg), 0],
+            [np.sin(angle_deg), np.cos(angle_deg), 0],
+            [0, 0, 1]
+        ])
+
+        rotated_mesh = anim_mesh.copy()
+        rotated_mesh.vertices = np.dot(rotated_mesh.vertices, R.T)
+
+        outfile = os.path.join(out_dir,f'frame_{frame_num:05d}.obj')
+        rotated_mesh.export(outfile)
+    print("----> rotation done")
 
 
+def render_video(in_path, out_path):
+
+    print('Rendering video ...')
+    cmd = f"ffmpeg -i {in_path} -vcodec libx264 -qscale:v 2 -b:v 1500k {out_path}"
+    os.system(cmd)
+    print(f'Video saved to {out_path}')
 
 def generate_mesh(obj1,obj2,transform_vector):
 
@@ -83,5 +91,7 @@ if __name__ == '__main__':
 
     anim_mesh = trimesh.load_mesh(str(input_file))
 
-    render_video(anim_mesh)
+    generate_frames(anim_mesh, args.output_file, num_frames=args.num_frames)
+
+    render_video(os.path.join(out_dir,'frame_%05d.obj'), str(output_file))
 
