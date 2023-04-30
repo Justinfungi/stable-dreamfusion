@@ -26,7 +26,9 @@ v0 are for back up or some initial version
   --mode has choices of rgb and depth which is correspondent to color and texture result as original paper Figure 5: Qualitative comparison with baselines. <br>
   --clip has choices of clip-ViT-B-32, CLIP B/16, CLIP L/14, same as original paper <br>
 
-      ```python Prompt.py --text "matte painting of a castle made of cheesecake surrounded by a moat made of ice cream" --workspace ../castle --latest ep0100 --mode rgb --clip clip-ViT-B-32```
+      ```bash
+      python Prompt.py --text "matte painting of a castle made of cheesecake surrounded by a moat made of ice cream" --workspace ../castle --latest ep0100 --mode rgb --clip clip-ViT-B-32
+      ```
 
   - Prompt.py (model name case sensitive) <br>
   For prompt seperation <br> <br>
